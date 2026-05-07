@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMirai AI | Stop Missing Customers. Start Using AI.</title>
+    <link rel="icon" href="data:,">
+    <meta name="description" content="AI solutions for Japanese businesses. 24/7 customer support in Japanese, English, Bengali. From ¥4,900/month.">
+    <style>
+        :root {
+            --brand-blue: #0052FF;
+            --brand-dark: #050A1F;
+            --surface-gray: #F8F9FC;
+            --text-main: #1A1D23;
+            --text-muted: #64748B;
+            --success-green: #00C48C;
+            --border-light: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--text-main);
+            background: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .nav {
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--brand-dark);
+        }
+
+        .logo span {
+            color: var(--brand-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: var(--brand-blue);
+        }
+
+        .lang-switch {
+            background: var(--surface-gray);
+            border-radius: 50px;
+            padding: 4px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .lang-btn {
+            border: none;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: Arial, sans-serif;
+        }
+
+        .lang-btn.active {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            color: var(--brand-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--brand-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--brand-dark);
+            font-weight: bold;
+        }
+
+        .hero h1 .highlight {
+            color: var(--brand-blue);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+
+        .btn-blue {
+            background: var(--brand-blue);
+            color: white;
+            box-shadow: 0 4px 16px rgba(0, 82, 255, 0.3);
+        }
+
+        .btn-blue:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--brand-blue);
+            border: 2px solid var(--brand-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--brand-blue);
+            color: white;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 20px 0;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .trust-icon {
+            color: var(--success-green);
+            font-size: 18px;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: var(--brand-dark);
+            color: white;
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+
+        .problem-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .problem-box h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+
+        .problem-list {
+            list-style: none;
+        }
+
+        .problem-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            color: #CBD5E1;
+            font-size: 16px;
+        }
+
+        .problem-list li::before {
+            content: "✕";
+            color: #EF4444;
+            font-weight: bold;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .solution-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .solution-box h3 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--brand-blue);
+        }
+
+        .solution-box p {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(0, 82, 255, 0.1);
+            color: var(--brand-blue);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: bold;
+            color: var(--brand-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Solutions Grid */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .solution-card {
+            background: var(--surface-gray);
+            padding: 30px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .solution-card:hover {
+            background: white;
+            border-color: var(--brand-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 82, 255, 0.15);
+        }
+
+        .solution-card h3 {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--brand-dark);
+            margin-bottom: 15px;
+        }
+
+        .solution-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .solution-example {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--brand-blue);
+            font-size: 15px;
+            font-style: italic;
+        }
+
+        /* Pricing */
+        .pricing {
+            background: var(--surface-gray);
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .price-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .price-card.featured {
+            border-color: var(--brand-blue);
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 82, 255, 0.2);
+        }
+
+        .price-badge {
+            background: var(--brand-blue);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .price-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--brand-dark);
+            margin-bottom: 10px;
+        }
+
+        .price-amount span {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .price-description {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            min-height: 50px;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .price-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-features li::before {
+            content: "✓";
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Team */
+        .team-profile {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: center;
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .team-img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, #0084FF 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .team-info h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .team-role {
+            font-size: 18px;
+            color: var(--brand-blue);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .team-bio {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .team-highlight {
+            background: var(--surface-gray);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Blog */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-post {
+            background: var(--surface-gray);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .blog-post:hover {
+            background: white;
+            border-color: var(--brand-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-post h4 {
+            font-size: 19px;
+            font-weight: bold;
+            color: var(--brand-dark);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .blog-link {
+            color: var(--brand-blue);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--surface-gray);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            padding: 15px 0;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--brand-blue);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .contact-form-wrapper {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: var(--surface-gray);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--brand-blue);
+            background: white;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 20px 30px;
+            background: var(--brand-dark);
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--brand-blue);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+
+        /* Language Toggle */
+        [lang="en"] .ja-only { display: none; }
+        [lang="ja"] .en-only { display: none; }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .problem-box {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .team-profile {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card.featured {
+                transform: scale(1);
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .problem-box h2 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+            /* Toast Notification */
+/* Toast Notification - Top Style */
+.toast {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #E0E7FF;           /* Soft blue background */
+    color: #1E3A8A;                /* Dark blue text */
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.25);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 500;
+    min-width: 300px;
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 15px;
+    line-height: 1.5;    
+    border-radius: 40px; 
+    border: 1px solid #A5B4FC;
+}
+
+.toast.success {
+    background: #DCFCE7;
+    color: #166534;
+    border-color: #86EFAC;
+}
+
+.toast.error {
+    background: #FEE2E2;
+    color: #B91C1C;
+    border-color: #FCA5A5;
+}
+
+.toast.show {
+    display: flex;
+    animation: slideDownToast 0.4s ease forwards;
+}
+
+@keyframes slideDownToast {
+    from {
+        transform: translate(-50%, -50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+    </style>
+</head>
+<body lang="en">
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">Tech<span>Mirai</span></div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#insights">Insights</a></li>
+                    <li>
+                        <a href="#contact" class="btn btn-blue" style="padding: 10px 20px; font-size: 14px;">
+                            <span class="en-only">Free Consultation</span>
+                            <span class="ja-only">無料相談</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="lang-switch">
+                            <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                            <button class="lang-btn" onclick="switchLanguage('ja')">日本語</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>
+                <span class="en-only">Stop Missing Customers.<br>Start Using <span class="highlight">AI.</span></span>
+                <span class="ja-only">お客様を逃さない。<br><span class="highlight">AI</span>を始めよう。</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span class="en-only">Your customers want answers now. You're busy running a business. We bridge the gap with AI agents that work 24/7 in English, Japanese, and Bengali.</span>
+                <span class="ja-only">お客様は今すぐ回答を求めています。あなたはビジネス運営で忙しい。日本語・英語・ベンガル語で24時間365日対応するAIエージェントで、そのギャップを埋めます。</span>
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-blue">
+                    <span class="en-only">Grow My Business Today</span>
+                    <span class="ja-only">今すぐビジネスを成長させる</span>
+                    →
+                </a>
+                <a href="#pricing" class="btn btn-outline">
+                    <span class="en-only">See Pricing</span>
+                    <span class="ja-only">料金を見る</span>
+                </a>
+            </div>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <span class="trust-icon">✓</span>
+                    <span class="en-only">From ¥4,900/month</span>
+                    <span class="ja-only">月額¥4,900から</span>
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-icon">✓</span>
+                    <span class="en-only">3 Languages Supported</span>
+                    <span class="ja-only">3言語対応</span>
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-icon">✓</span>
+                    <span class="en-only">Setup in Days</span>
+                    <span class="ja-only">数日で導入</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="problem-box">
+                <div>
+                    <h2>
+                        <span class="en-only">Does this sound like you?</span>
+                        <span class="ja-only">こんなお悩みありませんか？</span>
+                    </h2>
+                    <ul class="problem-list">
+                        <li>
+                            <span class="en-only">Customers visit your site but leave because they can't find info</span>
+                            <span class="ja-only">お客様がサイトを訪れても、情報が見つからず離脱してしまう</span>
+                        </li>
+                        <li>
+                            <span class="en-only">You miss calls and emails during peak hours or after work</span>
+                            <span class="ja-only">繁忙時や営業時間外の電話・メールに対応できない</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Hiring more staff is too expensive right now</span>
+                            <span class="ja-only">スタッフを増やすコストが高すぎる</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="solution-box">
+                    <h3>
+                        <span class="en-only">The Solution:</span>
+                        <span class="ja-only">解決策：</span>
+                    </h3>
+                    <p>
+                        <span class="en-only">A smart AI assistant that handles reservations, answers FAQs, and talks to your customers like a pro — at a fraction of the cost.</span>
+                        <span class="ja-only">予約対応、FAQ回答、プロレベルの顧客対応を、わずかなコストで実現するAIアシスタント。</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">
+                    <span class="en-only">What We Do</span>
+                    <span class="ja-only">サービス内容</span>
+                </span>
+                <h2 class="section-title">
+                    <span class="en-only">Simple Solutions for Real Problems</span>
+                    <span class="ja-only">実際の課題に対するシンプルな解決策</span>
+                </h2>
+                <p class="section-subtitle">
+                    <span class="en-only">No confusing tech jargon. Just tools that help you serve customers better and save time.</span>
+                    <span class="ja-only">難しい専門用語は不要。顧客サービス向上と時間節約を実現するツール。</span>
+                </p>
+            </div>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <h3>
+                        <span class="en-only">24/7 Customer Support</span>
+                        <span class="ja-only">24時間顧客サポート</span>
+                    </h3>
+                    <p>
+                        <span class="en-only">Your AI assistant talks to customers in Japanese, English, or Bengali — any time, day or night.</span>
+                        <span class="ja-only">日本語・英語・ベンガル語で、昼夜問わず顧客対応。</span>
+                    </p>
+                    <div class="solution-example">
+                        <span class="en-only">"Our restaurant takes reservations even when we're closed!"</span>
+                        <span class="ja-only">「閉店後も予約を受け付けられるようになりました！」</span>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <h3>
+                        <span class="en-only">Smart Business Automation</span>
+                        <span class="ja-only">スマート業務自動化</span>
+                    </h3>
+                    <p>
+                        <span class="en-only">Use smart cameras and AI to count inventory, check quality, or track deliveries. No manual entry needed.</span>
+                        <span class="ja-only">スマートカメラとAIで在庫カウント、品質チェック、配送追跡を自動化。</span>
+                    </p>
+                    <div class="solution-example">
+                        <span class="en-only">"We reduced stock counting from 3 hours to 15 minutes."</span>
+                        <span class="ja-only">「在庫確認が3時間から15分に短縮されました。」</span>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <h3>
+                        <span class="en-only">Custom Solutions</span>
+                        <span class="ja-only">カスタムソリューション</span>
+                    </h3>
+                    <p>
+                        <span class="en-only">We build AI tools that fit exactly what you need — fast, secure, and easy to use.</span>
+                        <span class="ja-only">ビジネスごとに最適なAIツールを構築。高速で安全、使いやすい。</span>
+                    </p>
+                    <div class="solution-example">
+                        <span class="en-only">"They built exactly what we asked for in 2 weeks."</span>
+                        <span class="ja-only">「依頼内容を2週間で正確に実現してくれました。」</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">
+                    <span class="en-only">Transparent Pricing</span>
+                    <span class="ja-only">明確な料金体系</span>
+                </span>
+                <h2 class="section-title">
+                    <span class="en-only">Simple Subscription Plans</span>
+                    <span class="ja-only">シンプルなサブスクリプション</span>
+                </h2>
+                <p class="section-subtitle">
+                    <span class="en-only">Affordable prices to get started, with rewards for long-term partners.</span>
+                    <span class="ja-only">お手頃な導入価格で始められ、長期パートナーには特典をご用意。</span>
+                </p>
+            </div>
+            
+            <div class="price-grid">
+                <div class="price-card">
+                    <h3>
+                        <span class="en-only">Starter Agent</span>
+                        <span class="ja-only">スターター</span>
+                    </h3>
+                    <div class="price-amount">¥4,900<span class="en-only">/mo</span><span class="ja-only">/月</span></div>
+                    <p class="price-description">
+                        <span class="en-only">Perfect for local shops and small businesses.</span>
+                        <span class="ja-only">地域店舗・小規模事業者に最適</span>
+                    </p>
+                    <ul class="price-features">
+                        <li>
+                            <span class="en-only">24/7 Customer Chat</span>
+                            <span class="ja-only">24時間顧客チャット</span>
+                        </li>
+                        <li>
+                            <span class="en-only">1 Language (EN or JP)</span>
+                            <span class="ja-only">1言語対応（英語または日本語）</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Basic FAQ Setup</span>
+                            <span class="ja-only">基本FAQ設定</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Email Support</span>
+                            <span class="ja-only">メールサポート</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width: 100%; justify-content: center;">
+                        <span class="en-only">Choose Starter</span>
+                        <span class="ja-only">スタータープランを選ぶ</span>
+                    </a>
+                </div>
+
+                <div class="price-card featured">
+                    <div class="price-badge">
+                        <span class="en-only">Best Value</span>
+                        <span class="ja-only">最もお得</span>
+                    </div>
+                    <h3>
+                        <span class="en-only">Growth Partner</span>
+                        <span class="ja-only">成長パートナー</span>
+                    </h3>
+                    <div class="price-amount">¥19,800<span class="en-only">/mo</span><span class="ja-only">/月</span></div>
+                    <p class="price-description">
+                        <span class="en-only"><strong>1-Year: Pay for 9 months, get 3 FREE</strong></span>
+                        <span class="ja-only"><strong>年間契約：9ヶ月分で3ヶ月無料</strong></span>
+                    </p>
+                    <ul class="price-features">
+                        <li>
+                            <span class="en-only">Multilingual (EN + JP + BN)</span>
+                            <span class="ja-only">3言語対応（英・日・ベンガル）</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Reservation Integration</span>
+                            <span class="ja-only">予約システム連携</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Monthly Reports</span>
+                            <span class="ja-only">月次レポート</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Priority Support</span>
+                            <span class="ja-only">優先サポート</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="btn btn-blue" style="width: 100%; justify-content: center;">
+                        <span class="en-only">Get 3 Months Free</span>
+                        <span class="ja-only">3ヶ月無料で始める</span>
+                    </a>
+                </div>
+
+                <div class="price-card">
+                    <h3>
+                        <span class="en-only">Enterprise</span>
+                        <span class="ja-only">エンタープライズ</span>
+                    </h3>
+                    <div class="price-amount">
+                        <span class="en-only">Contact</span>
+                        <span class="ja-only">お問い合わせ</span>
+                    </div>
+                    <p class="price-description">
+                        <span class="en-only">For companies needing scale and full automation.</span>
+                        <span class="ja-only">大規模展開・完全自動化が必要な企業向け</span>
+                    </p>
+                    <ul class="price-features">
+                        <li>
+                            <span class="en-only">Full Automation</span>
+                            <span class="ja-only">完全業務自動化</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Custom AI Training</span>
+                            <span class="ja-only">カスタムAIトレーニング</span>
+                        </li>
+                        <li>
+                            <span class="en-only">Dedicated Team</span>
+                            <span class="ja-only">専任チーム</span>
+                        </li>
+                        <li>
+                            <span class="en-only">SLA Guarantee</span>
+                            <span class="ja-only">SLA保証</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width: 100%; justify-content: center;">
+                        <span class="en-only">Contact Us</span>
+                        <span class="ja-only">お問い合わせ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">
+                    <span class="en-only">Our Team</span>
+                    <span class="ja-only">チーム紹介</span>
+                </span>
+                <h2 class="section-title">
+                    <span class="en-only">The Expertise Behind TechMirai</span>
+                    <span class="ja-only">TechMiraiを支える専門性</span>
+                </h2>
+            </div>
+            <div class="team-profile">
+                <div class="team-img">JS</div>
+                <div class="team-info">
+                    <h2>Jamal Shah</h2>
+                    <div class="team-role">
+                        <span class="en-only">Founder & Lead AI Engineer</span>
+                        <span class="ja-only">創業者・リードAIエンジニア</span>
+                    </div>
+                    <p class="team-bio">
+                        <span class="en-only">Based in Wako-shi, Saitama, Jamal brings deep technical expertise as an <strong>AI Engineer at Honda Research Institute (HRI-JP)</strong>. With over 7 years of experience living and working in Japan, he understands both the technical power of AI and the unique cultural needs of Japanese businesses.</span>
+                        <span class="ja-only">埼玉県和光市を拠点とするJamalは、<strong>Honda Research Institute（HRI-JP）のAIエンジニア</strong>として深い技術的専門知識を持っています。日本での7年以上の生活・就業経験により、AIの技術力と日本企業特有の文化的ニーズの両方を理解しています。</span>
+                    </p>
+                    <div class="team-highlight">
+                        <strong>
+                            <span class="en-only">Why we are affordable:</span>
+                            <span class="ja-only">なぜ手頃な価格で提供できるのか：</span>
+                        </strong>
+                        <span class="en-only"> Our core team is in Bangladesh, allowing us to offer Honda-level expertise at local business prices.</span>
+                        <span class="ja-only"> コアチームをバングラデシュに配置することで、Hondaレベルの専門知識を地域ビジネス価格で提供できます。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section id="insights" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">
+                    <span class="en-only">Business Insights</span>
+                    <span class="ja-only">ビジネスインサイト</span>
+                </span>
+                <h2 class="section-title">
+                    <span class="en-only">Learn How AI Helps Businesses</span>
+                    <span class="ja-only">AIがビジネスにどう役立つか学ぶ</span>
+                </h2>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-post">
+                    <h4>
+                        <span class="en-only">How AI is Saving Japanese Restaurants 20 Hours a Week</span>
+                        <span class="ja-only">AIが日本の飲食店に週20時間の余裕を生み出す方法</span>
+                    </h4>
+                    <a href="#" class="blog-link">
+                        <span class="en-only">Read More →</span>
+                        <span class="ja-only">続きを読む →</span>
+                    </a>
+                </div>
+                <div class="blog-post">
+                    <h4>
+                        <span class="en-only">Why Your Website Needs to Speak 3 Languages in 2026</span>
+                        <span class="ja-only">2026年、Webサイトが3言語対応すべき理由</span>
+                    </h4>
+                    <a href="#" class="blog-link">
+                        <span class="en-only">Read More →</span>
+                        <span class="ja-only">続きを読む →</span>
+                    </a>
+                </div>
+                <div class="blog-post">
+                    <h4>
+                        <span class="en-only">Automating Inventory Without the Technical Headache</span>
+                        <span class="ja-only">技術的な煩わしさなしで在庫管理を自動化</span>
+                    </h4>
+                    <a href="#" class="blog-link">
+                        <span class="en-only">Read More →</span>
+                        <span class="ja-only">続きを読む →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">
+                    <span class="en-only">Get In Touch</span>
+                    <span class="ja-only">お問い合わせ</span>
+                </span>
+                <h2 class="section-title">
+                    <span class="en-only">Let's Talk About Your Business</span>
+                    <span class="ja-only">あなたのビジネスについて話しましょう</span>
+                </h2>
+                <p class="section-subtitle">
+                    <span class="en-only">Free consultation. No pressure. Just honest advice.</span>
+                    <span class="ja-only">無料相談。営業なし。正直なアドバイスを提供します。</span>
+                </p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>
+                        <span class="en-only">Contact Information</span>
+                        <span class="ja-only">お問い合わせ先</span>
+                    </h3>
+                    <p>
+                        <span class="en-only">Reach out anytime. We respond within 24 hours.</span>
+                        <span class="ja-only">いつでもご連絡ください。24時間以内に返信いたします。</span>
+                    </p>
+                    <ul class="contact-details">
+                        <li>
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>
+                                    <span class="en-only">Office</span>
+                                    <span class="ja-only">所在地</span>
+                                </strong><br>
+                                <span class="en-only">Wako-shi, Saitama, Japan</span>
+                                <span class="ja-only">埼玉県和光市</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <strong>
+                                    <span class="en-only">Email</span>
+                                    <span class="ja-only">メール</span>
+                                </strong><br>
+                                info@techmirai-ai.com
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">🌐</div>
+                            <div>
+                                <strong>
+                                    <span class="en-only">Languages</span>
+                                    <span class="ja-only">対応言語</span>
+                                </strong><br>
+                                <span class="en-only">Japanese, English, Bengali</span>
+                                <span class="ja-only">日本語・英語・ベンガル語</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="en-only">Your Name</span>
+                                <span class="ja-only">お名前</span>
+                            </label>
+                            <input type="text" name="name" class="form-input" placeholder="Taro Yamada" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="en-only">Company / Business</span>
+                                <span class="ja-only">会社名・事業名</span>
+                            </label>
+                            <input type="text" name="company" class="form-input" placeholder="ABC Restaurant">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="en-only">Email Address</span>
+                                <span class="ja-only">メールアドレス</span>
+                            </label>
+                            <input type="email" name="email" class="form-input" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="en-only">How can we help you?</span>
+                                <span class="ja-only">ご相談内容</span>
+                            </label>
+                            <textarea name="message" class="form-textarea" placeholder="Tell us about your business needs..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-blue" style="width: 100%; justify-content: center;">
+                            <span class="en-only">Send Message</span>
+                            <span class="ja-only">送信する</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Tech<span>Mirai</span></div>
+            <p>
+                <span class="en-only">Making AI simple for businesses worldwide</span>
+                <span class="ja-only">世界中のビジネスにシンプルなAIを</span>
+            </p>
+            <p class="footer-text">© 2026 TechMirai AI — Saitama, Japan | Dhaka, Bangladesh</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <div id="toast" class="toast">
+    <div class="toast-content">
+        <span class="toast-message"></span>
+    </div>
+</div>
+</body>
+</html>
