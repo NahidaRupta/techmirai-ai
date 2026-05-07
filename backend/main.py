@@ -13,6 +13,8 @@ import os
 from email.mime.text import MIMEText    
 from email.mime.multipart import MIMEMultipart
 import smtplib
+import os
+from dotenv import load_dotenv
 
 # Database setup
 uri = os.getenv("DATABASE_URL")
@@ -83,91 +85,64 @@ def get_db():
         yield db
     finally:
         db.close()
-
-# Email configuration
+        
+load_dotenv()
+## --- Email Configuration ---
+# This part stays! It reads the variables you set in Render's "Environment" tab.
+# --- Email Configuration ---
+# These are global variables. They load once when the app starts.
 SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
-SMTP_USER = os.getenv("SMTP_USER", "info@techmirai-ai.com")
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")  # Set this in environment
-ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "info@techmirai-ai.com")
+SMTP_USER = os.getenv("SMTP_USER", "nahida.rahaman37@gmail.com")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "") 
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "nahida.rahaman37@gmail.com")
 
 def send_email_notification(contact: ContactRequest, submission_id: int):
     """Send email notification to admin"""
+    
+    # 1. Check if we have the password. If not, we can't send.
+    if not SMTP_PASSWORD:
+        print(f"⚠️ SMTP_PASSWORD not set. Skipping email for submission #{submission_id}")
+        return
+
     try:
         msg = MIMEMultipart('alternative')
-        msg['Subject'] = f"New Contact Form Submission #{submission_id}"
-        msg['From'] = SMTP_USER
-        msg['To'] = ADMIN_EMAIL
+        msg['Subject'] = f"🚀 New TechMirai Lead: {contact.name}"
+        msg['From'] = SMTP_USER 
+        msg['To'] = ADMIN_EMAIL 
         
-        # Create email body
-        text = f"""
-New Contact Form Submission
-
-Name: {contact.name}
-Company: {contact.company or 'N/A'}
-Email: {contact.email}
-Language: {contact.language}
-Timestamp: {contact.timestamp or datetime.utcnow().isoformat()}
-
-Message:
-{contact.message}
-
----
-TechMirai AI Contact System
-        """
+        # Plain text version
+        text = f"New Lead #{submission_id}\nName: {contact.name}\nEmail: {contact.email}\nMessage: {contact.message}"
         
+        # Professional HTML version
         html = f"""
-<html>
-<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-    <h2 style="color: #0052FF;">New Contact Form Submission #{submission_id}</h2>
-    <table style="width: 100%; border-collapse: collapse;">
-        <tr>
-            <td style="padding: 10px; background: #f8f9fc; font-weight: bold;">Name:</td>
-            <td style="padding: 10px;">{contact.name}</td>
-        </tr>
-        <tr>
-            <td style="padding: 10px; background: #f8f9fc; font-weight: bold;">Company:</td>
-            <td style="padding: 10px;">{contact.company or 'N/A'}</td>
-        </tr>
-        <tr>
-            <td style="padding: 10px; background: #f8f9fc; font-weight: bold;">Email:</td>
-            <td style="padding: 10px;"><a href="mailto:{contact.email}">{contact.email}</a></td>
-        </tr>
-        <tr>
-            <td style="padding: 10px; background: #f8f9fc; font-weight: bold;">Language:</td>
-            <td style="padding: 10px;">{contact.language.upper()}</td>
-        </tr>
-        <tr>
-            <td style="padding: 10px; background: #f8f9fc; font-weight: bold;">Timestamp:</td>
-            <td style="padding: 10px;">{contact.timestamp or datetime.utcnow().isoformat()}</td>
-        </tr>
-    </table>
-    <h3 style="color: #050A1F; margin-top: 20px;">Message:</h3>
-    <div style="background: #f8f9fc; padding: 15px; border-left: 3px solid #0052FF; margin-top: 10px;">
-        {contact.message}
-    </div>
-    <hr style="margin-top: 30px; border: none; border-top: 1px solid #e2e8f0;">
-    <p style="color: #64748B; font-size: 12px;">TechMirai AI Contact System</p>
-</body>
-</html>
+        <html>
+            <body style="font-family: sans-serif; color: #333;">
+                <h2 style="color: #0052FF;">New Contact Form Submission</h2>
+                <p><strong>Submission ID:</strong> {submission_id}</p>
+                <hr>
+                <p><strong>Name:</strong> {contact.name}</p>
+                <p><strong>Company:</strong> {contact.company or 'N/A'}</p>
+                <p><strong>Email:</strong> {contact.email}</p>
+                <p><strong>Message:</strong></p>
+                <div style="background: #f4f4f4; padding: 15px; border-radius: 5px;">{contact.message}</div>
+            </body>
+        </html>
         """
         
-        part1 = MIMEText(text, 'plain')
-        part2 = MIMEText(html, 'html')
-        msg.attach(part1)
-        msg.attach(part2)
+        msg.attach(MIMEText(text, 'plain'))
+        msg.attach(MIMEText(html, 'html'))
         
-        # Send email
-        if SMTP_PASSWORD:  # Only send if SMTP is configured
-            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-                server.starttls()
-                server.login(SMTP_USER, SMTP_PASSWORD)
-                server.send_message(msg)
-        else:
-            print(f"Email notification would be sent for submission #{submission_id}")
+        # 2. Connect and Send using the global variables
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()  # Secure the connection
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.send_message(msg)
+            print(f"✅ Email notification sent for submission #{submission_id}")
             
     except Exception as e:
-        print(f"Error sending email: {e}")
+        # This will show up in your Render Logs if Google blocks the login
+        print(f"❌ SMTP Error: {e}")
 
 # API Routes
 @app.get("/")
