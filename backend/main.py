@@ -172,7 +172,11 @@ TechMirai AI Contact System
 # API Routes
 @app.get("/")
 async def read_root():
-    return FileResponse("../frontend/index.html")
+    return {
+        "status": "TechMirai AI API is Online",
+        "docs": "/docs",
+        "message": "Welcome to the backend"
+    }
 
 @app.post("/api/contact", response_model=ContactResponse)
 async def submit_contact(
@@ -255,13 +259,6 @@ async def update_submission_status(
     
     return {"success": True, "message": f"Status updated to {status}"}
 
-# Serve Frontend
-@app.get("/")
-async def serve_frontend():
-    return FileResponse("../frontend/index.html")
-
-# Static files
-app.mount("/static", StaticFiles(directory="../frontend"), name="static")
 
 # Health check
 @app.get("/health")
