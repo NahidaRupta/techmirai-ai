@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends,BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -156,6 +156,7 @@ async def read_root():
 @app.post("/api/contact", response_model=ContactResponse)
 async def submit_contact(
     contact: ContactRequest,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     """Handle contact form submissions"""
@@ -173,7 +174,7 @@ async def submit_contact(
         db.commit()
         db.refresh(db_submission)
         
-        send_email_notification(contact, db_submission.id)
+        background_tasks.add_task(send_email_notification, contact, db_submission.id)
         
         return ContactResponse(
             success=True,
