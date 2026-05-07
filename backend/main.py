@@ -15,7 +15,12 @@ from email.mime.multipart import MIMEMultipart
 import smtplib
 
 # Database setup
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://techmirai:techmirai123@localhost/techmirai_db")
+uri = os.getenv("DATABASE_URL")
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+# Fallback to your local ThinkPad database if no environment variable is found
+SQLALCHEMY_DATABASE_URL = uri or "postgresql://techmirai:techmirai123@localhost/techmirai_db"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -56,9 +61,16 @@ class ContactResponse(BaseModel):
 app = FastAPI(title="TechMirai AI API", version="1.0.0")
 
 # CORS middleware
+origins = [
+    "https://techmirai-ai.com",
+    "https://www.techmirai-ai.com",
+    "https://nahidarupta.github.io",
+    "http://localhost:4200", # Keeps your local ThinkPad testing working
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify exact origins
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
