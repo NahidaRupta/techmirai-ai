@@ -66,8 +66,8 @@ app = FastAPI(title="TechMirai AI API", version="1.0.0")
 origins = [
     "https://techmirai-ai.com",
     "https://www.techmirai-ai.com",
-    "https://nahidarupta.github.io",
-    "http://localhost:4200", # Keeps your local ThinkPad testing working
+    "https://NahidaRupta.github.io",
+    "http://localhost:3000", # Keeps your local ThinkPad testing working
 ]
 
 app.add_middleware(
@@ -85,7 +85,7 @@ def get_db():
         yield db
     finally:
         db.close()
-        
+
 load_dotenv()
 ## --- Email Configuration ---
 # This part stays! It reads the variables you set in Render's "Environment" tab.
